@@ -5,13 +5,17 @@ import { StyleSheet, Text, View, Pressable } from 'react-native';
 {/* <link rel="stylesheet" href="mainPage.css"></link> */}
 
 
-export default function MainPage() {
+export default function MainPage({navigation}) {
+  function onCreateEvent() {
+    navigation.navigate('CreatePage')
+  };
+
   return (
     <View style={style.container}>
       <Text style={style.header}>
         Events
       </Text>
-      <Pressable style={style.button}>
+      <Pressable style={style.button} onPress={() => {onCreateEvent()}}>
         <Text>Create Event</Text>
       </Pressable>
     </View>
