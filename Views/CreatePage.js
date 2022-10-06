@@ -6,8 +6,11 @@ import { TextInput } from "react-native";
 
 export default function CreatePage() {
   const [inputValues, setInputValues] = React.useState({
-    name: "Name",
-    email: "Email",
+    eventName: "Event name",
+    date: "Date/Month",
+    startTime: "Start Time",
+    endTime: "End Time",
+
   });
 
   const handleChange = (name, text) => {
@@ -23,20 +26,32 @@ export default function CreatePage() {
         Your New Event
       </Text>
       <TextInput
-        label="Name"
+        label="Name of event"
         style={styles.input}
-        value={inputValues.name}
-        onChangeText={(text) => handleChange('Name', text)}
+        value={inputValues.eventName}
+        onChangeText={newText => setInputValues(newText)}
         mode="outlined"
-        style={styles.input}
       />
       <TextInput
-        label="Email"
+        label="Month/Date"
         style={styles.input}
-        value={inputValues.email}
-        onChangeText={(text) => handleChange('Email', text)}
+        value={inputValues.date}
+        onChangeText={newText => setInputValues(newText)}
         mode="outlined"
+      />
+        <TextInput
+        label="startTime"
         style={styles.input}
+        value={inputValues.startTime}
+        onChangeText={newText => setInputValues(newText)}
+        mode="outlined"
+      />
+        <TextInput
+        label="endTime"
+        style={styles.input}
+        value={inputValues.endTime}
+        onChangeText={newText => setInputValues(newText)}
+        mode="outlined"
       />
       <Pressable style={styles.button}>
         <Text>Create Event</Text>
