@@ -1,10 +1,9 @@
-import React from 'react';
-import { StyleSheet, Text, View, Pressable } from 'react-native';
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import React from "react";
+import { StyleSheet, Text, View, Pressable } from "react-native";
 import { TextInput } from "react-native";
 
-
-
-export default function CreatePage() {
+export default function CreatePage({ navigation }) {
   const [inputValues, setInputValues] = React.useState({
     name: "Name",
     email: "Email",
@@ -17,16 +16,20 @@ export default function CreatePage() {
     });
   };
 
+  const createEvent = () => {
+    navigation.navigate("MainPage", {
+      paramKey: inputValues,
+    });
+  };
+
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>
-        Your New Event
-      </Text>
+      <Text style={styles.header}>Your New Event</Text>
       <TextInput
         label="Name"
         style={styles.input}
         value={inputValues.name}
-        onChangeText={(text) => handleChange('Name', text)}
+        onChangeText={(text) => handleChange("Name", text)}
         mode="outlined"
         style={styles.input}
       />
@@ -34,11 +37,11 @@ export default function CreatePage() {
         label="Email"
         style={styles.input}
         value={inputValues.email}
-        onChangeText={(text) => handleChange('Email', text)}
+        onChangeText={(text) => handleChange("Email", text)}
         mode="outlined"
         style={styles.input}
       />
-      <Pressable style={styles.button}>
+      <Pressable style={styles.button} onPress={createEvent}>
         <Text>Create Event</Text>
       </Pressable>
     </View>
@@ -48,27 +51,27 @@ export default function CreatePage() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
   },
   header: {
     fontSize: 30,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   button: {
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     paddingVertical: 12,
     paddingHorizontal: 32,
     borderRadius: 4,
     elevation: 3,
-    backgroundColor: 'pink',
+    backgroundColor: "pink",
   },
   input: {
     width: 100,
     height: 20,
-    backgroundColor: 'pink',
+    backgroundColor: "pink",
     marginVertical: 10,
   },
 });
