@@ -5,18 +5,18 @@ import { TextInput } from "react-native";
 
 
 export default function CreatePage() {
-    const [inputValues, setInputValues] = React.useState({
-        name: "",
-        email: "",
-    });
+  const [inputValues, setInputValues] = React.useState({
+    name: "Name",
+    email: "Email",
+  });
 
-    const handleChange = (name, text) => {
-        setInputValues({
-        //   ...inputValues,
-          [name]: text,
-        });
-    };
-    
+  const handleChange = (name, text) => {
+    setInputValues({
+      //   ...inputValues,
+      [name]: text,
+    });
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.header}>
@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
   input: {
     width: 100,
     height: 20,
-    backgroundColor: 'blue',
+    backgroundColor: 'pink',
     marginVertical: 10,
   },
 });
