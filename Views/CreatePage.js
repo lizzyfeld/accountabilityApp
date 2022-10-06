@@ -2,22 +2,24 @@ import React from 'react';
 import { StyleSheet, Text, View, Pressable } from 'react-native';
 import { TextInput } from "react-native";
 
+const initialValues = {
+  eventName: "Event name",
+  date: "Date/Month",
+  startTime: "Start Time",
+  endTime: "End Time",
+}
 
 
 export default function CreatePage() {
-  const [inputValues, setInputValues] = React.useState({
-    eventName: "Event name",
-    date: "Date/Month",
-    startTime: "Start Time",
-    endTime: "End Time",
+  const [inputValues, setInputValues] = React.useState(initialValues);
 
-  });
-
-  const handleChange = (name, text) => {
+  const handleChange = (e) => {
+    const { name, value } = e.target;
     setInputValues({
-      //   ...inputValues,
-      [name]: text,
+      ...inputValues,
+      [name]: value,
     });
+    console.log(inputValues)
   };
 
   return (
@@ -26,31 +28,35 @@ export default function CreatePage() {
         Your New Event
       </Text>
       <TextInput
-        label="Name of event"
+        label= "Name of event"
+        name = "Name of event"
         style={styles.input}
         value={inputValues.eventName}
-        onChangeText={newText => setInputValues(newText)}
+        onChangeText={handleChange}
         mode="outlined"
       />
       <TextInput
         label="Month/Date"
+        name = "Month/Date"
         style={styles.input}
         value={inputValues.date}
-        onChangeText={newText => setInputValues(newText)}
+        onChangeText={handleChange}
         mode="outlined"
       />
         <TextInput
         label="startTime"
+        name = "startTime"
         style={styles.input}
         value={inputValues.startTime}
-        onChangeText={newText => setInputValues(newText)}
+        onChangeText={handleChange}
         mode="outlined"
       />
         <TextInput
         label="endTime"
+        name = "endTime"
         style={styles.input}
         value={inputValues.endTime}
-        onChangeText={newText => setInputValues(newText)}
+        onChangeText={handleChange}
         mode="outlined"
       />
       <Pressable style={styles.button}>
