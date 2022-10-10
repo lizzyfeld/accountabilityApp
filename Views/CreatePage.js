@@ -1,63 +1,58 @@
-import React from 'react';
-import { StyleSheet, Text, View, Pressable } from 'react-native';
+import React, { useState }  from 'react';
+import { StyleSheet, Text, View, Pressable,} from 'react-native';
 import { TextInput } from "react-native";
 
-const initialValues = {
-  eventName: "Event name",
-  date: "Date/Month",
-  startTime: "Start Time",
-  endTime: "End Time",
-}
+
 
 
 export default function CreatePage() {
-  const [inputValues, setInputValues] = React.useState(initialValues);
+  const [eventName, setEventName] = useState("Event name");
+  const [date, setDate] = useState("Date/Month");
+  const [startTime, setStart] = useState("Start time");
+  const [endTime, setEnd] = useState("End time");
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setInputValues({
-      ...inputValues,
-      [name]: value,
-    });
-    console.log(inputValues)
-  };
 
   return (
     <View style={styles.container}>
       <Text style={styles.header}>
-        Your New Event
+       Make your new event perra!
       </Text>
       <TextInput
-        label= "Name of event"
-        name = "Name of event"
+        label="Name of event"
+        name="Name of event"
         style={styles.input}
-        value={inputValues.eventName}
-        onChangeText={handleChange}
+        value={eventName}
+        onChangeText={newText => setEventName(newText)}
         mode="outlined"
+        defaultValue={eventName}
       />
       <TextInput
         label="Month/Date"
         name = "Month/Date"
         style={styles.input}
-        value={inputValues.date}
-        onChangeText={handleChange}
+        value={date}
+        onChangeText={newText => setDate(newText)}
         mode="outlined"
+        defaultValue={date}
       />
         <TextInput
         label="startTime"
         name = "startTime"
         style={styles.input}
-        value={inputValues.startTime}
-        onChangeText={handleChange}
+        value={startTime}
+        onChangeText={newText => setStart(newText)}
         mode="outlined"
+        defaultValue= {startTime}
       />
         <TextInput
         label="endTime"
         name = "endTime"
         style={styles.input}
-        value={inputValues.endTime}
-        onChangeText={handleChange}
+        value={endTime}
+        onChangeText={newText => setEnd(newText)}
         mode="outlined"
+        defaultValue= {endTime}
+
       />
       <Pressable style={styles.button}>
         <Text>Create Event</Text>
