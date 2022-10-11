@@ -5,13 +5,21 @@ import { TextInput } from "react-native";
 
 
 
-export default function CreatePage() {
+export default function CreatePage( {navigation}) {
   const [eventName, setEventName] = useState("Event name");
   const [date, setDate] = useState("Date/Month");
   const [startTime, setStart] = useState("Start time");
   const [endTime, setEnd] = useState("End time");
 
-
+  const createEvent = () => {
+    navigation.navigate("MainPage", {
+      eventProps: eventName 
+      // dateProps: date,
+      // startTimeProps: startTime, 
+      // endTimeProps: endTime,
+    });
+  };
+  
   return (
     <View style={styles.container}>
       <Text style={styles.header}>
@@ -54,7 +62,7 @@ export default function CreatePage() {
         defaultValue= {endTime}
 
       />
-      <Pressable style={styles.button}>
+      <Pressable style={styles.button} onPress = {createEvent}>
         <Text>Create Event</Text>
       </Pressable>
     </View>
