@@ -1,22 +1,27 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Pressable } from 'react-native';
+import { StatusBar } from "expo-status-bar";
+import { StyleSheet, Text, View, Pressable } from "react-native";
+
 // import style from './mainPage.css'
 
-{/* <link rel="stylesheet" href="mainPage.css"></link> */}
-
+{
+  /* <link rel="stylesheet" href="mainPage.css"></link> */
+}
 
 export default function MainPage({ route, navigation }) {
-  const { eventProps} = route.params;
+  const { eventProps } = route.params;
   function onCreateEvent() {
-    navigation.navigate('CreatePage')
-  };
+    navigation.navigate("CreatePage");
+  }
 
   return (
     <View style={style.container}>
-      <Text style={style.header}>
-      {eventProps}
-      </Text>
-      <Pressable style={style.button} onPress={() => {onCreateEvent()}}>
+      <Text style={style.header}>{eventProps}</Text>
+      <Pressable
+        style={style.button}
+        onPress={() => {
+          onCreateEvent();
+        }}
+      >
         <Text>Create Event</Text>
       </Pressable>
     </View>
@@ -26,21 +31,21 @@ export default function MainPage({ route, navigation }) {
 const style = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
   },
   header: {
     fontSize: 30,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   button: {
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     paddingVertical: 12,
     paddingHorizontal: 32,
     borderRadius: 4,
     elevation: 3,
-    backgroundColor: 'pink',
+    backgroundColor: "pink",
   },
 });

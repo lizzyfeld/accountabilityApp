@@ -1,68 +1,63 @@
-import React, { useState }  from 'react';
-import { StyleSheet, Text, View, Pressable,} from 'react-native';
+import React, { useState } from "react";
+import { StyleSheet, Text, View, Pressable } from "react-native";
 import { TextInput } from "react-native";
+// import ReactDateInputs from "react-date-inputs";
 
-
-
-
-export default function CreatePage( {navigation}) {
+export default function CreatePage({ navigation }) {
   const [eventName, setEventName] = useState("Event name");
-  const [date, setDate] = useState("Date/Month");
+  const [date, setDate] = useState(new Date());
   const [startTime, setStart] = useState("Start time");
   const [endTime, setEnd] = useState("End time");
 
   const createEvent = () => {
     navigation.navigate("MainPage", {
-      eventProps: eventName 
+      eventProps: eventName,
       // dateProps: date,
-      // startTimeProps: startTime, 
+      // startTimeProps: startTime,
       // endTimeProps: endTime,
     });
   };
-  
+
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>
-       Make your new event perra!
-      </Text>
+      <Text style={styles.header}>Make your new event perra!</Text>
       <TextInput
         label="Name of event"
         name="Name of event"
         style={styles.input}
         value={eventName}
-        onChangeText={newText => setEventName(newText)}
+        onChangeText={(newText) => setEventName(newText)}
         mode="outlined"
         defaultValue={eventName}
       />
-      <TextInput
+      {/* <TextInput
         label="Month/Date"
-        name = "Month/Date"
+        name="Month/Date"
         style={styles.input}
-        value={date}
-        onChangeText={newText => setDate(newText)}
+        value={date.format}
+        onChangeText={(newText) => setDate(newText)}
         mode="outlined"
         defaultValue={date}
-      />
-        <TextInput
+      /> */}
+      <TextInput
         label="startTime"
-        name = "startTime"
+        name="startTime"
         style={styles.input}
         value={startTime}
-        onChangeText={newText => setStart(newText)}
+        onChangeText={(newText) => setStart(newText)}
         mode="outlined"
-        defaultValue= {startTime}
+        defaultValue={startTime}
       />
-        <TextInput
+      <TextInput
         label="endTime"
-        name = "endTime"
+        name="endTime"
         style={styles.input}
         value={endTime}
-        onChangeText={newText => setEnd(newText)}
+        onChangeText={(newText) => setEnd(newText)}
         mode="outlined"
-        defaultValue= {endTime}
-
+        defaultValue={endTime}
       />
-      <Pressable style={styles.button} onPress = {createEvent}>
+      <Pressable style={styles.button} onPress={createEvent}>
         <Text>Create Event</Text>
       </Pressable>
     </View>
@@ -72,27 +67,27 @@ export default function CreatePage( {navigation}) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
   },
   header: {
     fontSize: 30,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   button: {
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     paddingVertical: 12,
     paddingHorizontal: 32,
     borderRadius: 4,
     elevation: 3,
-    backgroundColor: 'pink',
+    backgroundColor: "pink",
   },
   input: {
     width: 100,
     height: 20,
-    backgroundColor: 'pink',
+    backgroundColor: "pink",
     marginVertical: 10,
   },
 });
