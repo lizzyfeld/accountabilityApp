@@ -11,16 +11,15 @@ function Test(props) {
   console.log("In test", props);
   return <View />;
 }
-
 export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="Test" component={Test} />
+        {/* <Stack.Screen name="Test" component={Test} /> */}
         <Stack.Screen
-          getId={({ params }) => params.userId}
           name="MainPage"
           component={MainPage}
+          getId={({ params }) => params.id}
         />
         <Stack.Screen name="CreatePage" component={CreatePage} />
       </Stack.Navigator>

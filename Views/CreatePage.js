@@ -15,7 +15,8 @@ export default function CreatePage({ navigation }) {
       // // dateProps: date,
       // startTimeProps: startTime,
       // endTimeProps: endTime,
-      data: "azsdasdasd",
+      id: 1,
+      // data: "azsdasdasd",
     });
   };
 

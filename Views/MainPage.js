@@ -12,6 +12,7 @@ export default function MainPage(props) {
   const { route, navigation } = props;
   console.log(props);
   // const { eventProps } = route.params;
+
   function onCreateEvent() {
     navigation.navigate("CreatePage");
   }
@@ -25,6 +26,7 @@ export default function MainPage(props) {
           onCreateEvent();
         }}
       >
+        {/* <Text>{props}</Text> */}
         <Text>Create Event</Text>
       </Pressable>
     </View>
