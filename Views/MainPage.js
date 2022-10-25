@@ -26,9 +26,9 @@ export default function MainPage(props) {
           onCreateEvent();
         }}
       >
-        {/* <Text>{props}</Text> */}
         <Text>Create Event</Text>
       </Pressable>
+      <Text>{props.id}</Text>
     </View>
   );
 }
