@@ -1,14 +1,8 @@
-import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View, Pressable } from "react-native";
-
+import { useEvent } from "../context/EventContext";
 // import style from './mainPage.css'
-
-{
-  /* <link rel="stylesheet" href="mainPage.css"></link> */
-}
-
-// props: {  route: sadsdsd, navigation: asdsads, jeff: 'bezos' }
 export default function MainPage(props) {
+  const event = useEvent();
   const { route, navigation } = props;
   console.log(props);
   // const { eventProps } = route.params;
@@ -28,7 +22,7 @@ export default function MainPage(props) {
       >
         <Text>Create Event</Text>
       </Pressable>
-      <Text>{props.id}</Text>
+      <Text>{event.name}</Text>
     </View>
   );
 }

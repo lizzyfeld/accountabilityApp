@@ -1,23 +1,22 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, View, Pressable } from "react-native";
 import { TextInput } from "react-native";
+import { useEvent } from "../context/EventContext";
 // import ReactDateInputs from "react-date-inputs";
 
 export default function CreatePage({ navigation }) {
   const [eventName, setEventName] = useState("Event name");
+  const eventInfo = useEvent();
   // const [date, setDate] = useState(new Date());id
-  const [startTime, setStart] = useState("Start time");
+  //eventInfo.const[(startTime, setStart)] = useState("Start time");
   const [endTime, setEnd] = useState("End time");
 
   const createEvent = () => {
-    navigation.navigate("MainPage", {
-      eventProps: eventName,
-      // // dateProps: date,
-      // startTimeProps: startTime,
-      // endTimeProps: endTime,
+    eventInfo.setEvent({
+      name: eventName,
       id: 2,
-      // data: "azsdasdasd",
     });
+    navigation.navigate("MainPage");
   };
 
   return (
@@ -41,7 +40,7 @@ export default function CreatePage({ navigation }) {
         mode="outlined"
         defaultValue={date}
       /> */}
-      <TextInput
+      {/* <TextInput
         label="startTime"
         name="startTime"
         style={styles.input}
@@ -58,7 +57,7 @@ export default function CreatePage({ navigation }) {
         onChangeText={(newText) => setEnd(newText)}
         mode="outlined"
         defaultValue={endTime}
-      />
+      /> */}
       <Pressable style={styles.button} onPress={createEvent}>
         <Text>Create Event</Text>
       </Pressable>
