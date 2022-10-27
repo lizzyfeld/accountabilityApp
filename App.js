@@ -6,11 +6,6 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import CreatePage from "./Views/CreatePage";
 
 const Stack = createNativeStackNavigator();
-
-function Test(props) {
-  console.log("In test", props);
-  return <View />;
-}
 export default function App() {
   return (
     <NavigationContainer>
@@ -21,7 +16,8 @@ export default function App() {
           component={MainPage}
           initialParams={{
             eventProps: "",
-            startTimeProps: ""
+            startTimeProps: "",
+            endTimeProps: "",
           }}
         />
         <Stack.Screen name="CreatePage" component={CreatePage} />
@@ -29,7 +25,6 @@ export default function App() {
     </NavigationContainer>
   );
 }
-
 
 const styles = StyleSheet.create({
   container: {

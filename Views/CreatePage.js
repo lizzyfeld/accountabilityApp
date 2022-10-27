@@ -12,11 +12,9 @@ export default function CreatePage({ navigation }) {
   const createEvent = () => {
     navigation.navigate("MainPage", {
       eventProps: eventName,
-      //dateProps: date,
+      // dateProps: dateName,
       startTimeProps: startTime,
-      // endTimeProps: endTime,
-      // id: 2,
-      // data: "azsdasdasd",
+      endTimeProps: endTime,
     });
   };
 
