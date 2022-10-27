@@ -21,7 +21,9 @@ export default function App() {
           component={MainPage}
           initialParams={{
             eventProps: "",
-            startTimeProps: ""
+            startTimeProps: "", 
+            endTimeProps: "",
+            dateProps: ""
           }}
         />
         <Stack.Screen name="CreatePage" component={CreatePage} />
