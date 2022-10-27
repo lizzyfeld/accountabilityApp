@@ -5,7 +5,7 @@ import { TextInput } from "react-native";
 
 export default function CreatePage({ navigation }) {
   const [eventName, setEventName] = useState("Event name");
-  //const [date, setDate] = useState(new Date());id
+  const [date, setDate] = useState("DD/MM");
   const [startTime, setStart] = useState("Start time");
   const [endTime, setEnd] = useState("End time");
 
@@ -30,7 +30,7 @@ export default function CreatePage({ navigation }) {
         mode="outlined"
         defaultValue={eventName}
       />
-      {/* <TextInput
+      <TextInput
         label="Month/Date"
         name="Month/Date"
         style={styles.input}
@@ -38,7 +38,7 @@ export default function CreatePage({ navigation }) {
         onChangeText={(newText) => setDate(newText)}
         mode="outlined"
         defaultValue={date}
-      /> */}
+      />
       <TextInput
         label="startTime"
         name="startTime"
@@ -58,7 +58,7 @@ export default function CreatePage({ navigation }) {
         defaultValue={endTime}
       />
       <Pressable style={styles.button} onPress={createEvent}>
-        <Text>Create Event</Text>
+        <Text style={styles.buttontext}>Create Event</Text>
       </Pressable>
     </View>
   );
@@ -72,8 +72,9 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   header: {
-    fontSize: 30,
+    fontSize: 25,
     fontWeight: "bold",
+    marginBottom: 20,
   },
   button: {
     alignItems: "center",
@@ -83,11 +84,16 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     elevation: 3,
     backgroundColor: "pink",
+    marginTop: "20%",
   },
   input: {
     width: 100,
     height: 20,
     backgroundColor: "pink",
     marginVertical: 10,
+  },
+  buttontext: {
+    fontWeight: "bold",
+    fontSize: 18,
   },
 });
