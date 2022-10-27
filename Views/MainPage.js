@@ -10,7 +10,7 @@ import { StyleSheet, Text, View, Pressable } from "react-native";
 // props: {  route: sadsdsd, navigation: asdsads, jeff: 'bezos' }
 export default function MainPage(props) {
   const { route, navigation } = props;
-  console.log(props);
+  console.log(route);
   // const { eventProps } = route.params;
 
   function onCreateEvent() {
@@ -28,7 +28,8 @@ export default function MainPage(props) {
       >
         <Text>Create Event</Text>
       </Pressable>
-      <Text>{props.id}</Text>
+      <Text>{route.params.eventProps}</Text>
+      <Text>{route.params.startTimeProps}</Text>
     </View>
   );
 }

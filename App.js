@@ -19,13 +19,17 @@ export default function App() {
         <Stack.Screen
           name="MainPage"
           component={MainPage}
-          getId={({ params }) => params.id}
+          initialParams={{
+            eventProps: "",
+            startTimeProps: ""
+          }}
         />
         <Stack.Screen name="CreatePage" component={CreatePage} />
       </Stack.Navigator>
     </NavigationContainer>
   );
 }
+
 
 const styles = StyleSheet.create({
   container: {

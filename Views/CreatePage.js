@@ -5,17 +5,17 @@ import { TextInput } from "react-native";
 
 export default function CreatePage({ navigation }) {
   const [eventName, setEventName] = useState("Event name");
-  // const [date, setDate] = useState(new Date());id
+  //const [date, setDate] = useState(new Date());id
   const [startTime, setStart] = useState("Start time");
   const [endTime, setEnd] = useState("End time");
 
   const createEvent = () => {
     navigation.navigate("MainPage", {
       eventProps: eventName,
-      // // dateProps: date,
-      // startTimeProps: startTime,
+      //dateProps: date,
+      startTimeProps: startTime,
       // endTimeProps: endTime,
-      id: 2,
+      // id: 2,
       // data: "azsdasdasd",
     });
   };
