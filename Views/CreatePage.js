@@ -1,11 +1,42 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View, Pressable } from "react-native";
+import { StyleSheet, Text, View, Pressable, SafeAreaView, Button} from "react-native";
 import { TextInput } from "react-native";
+// import DatePicker from "react-datepicker";
+// import DatePicker from 'react-native-date-picker';
+import DateTimePickerModal from "react-native-modal-datetime-picker";
+
+
+
+//import DateTimePicker from '@react-native-community/datetimepicker';
+
+
 // import ReactDateInputs from "react-date-inputs";
 
 export default function CreatePage({ navigation }) {
   const [eventName, setEventName] = useState("Event name");
-  const [date, setDate] = useState("DD/MM");
+
+  const [date, setDate] = useState(''); 
+
+  const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+
+  const showDatePicker = () => {
+    setDatePickerVisibility(true);
+  };
+
+  const hideDatePicker = () => {
+    setDatePickerVisibility(false);
+  };
+
+  const handleConfirm = (date) => {
+    console.warn("A date has been picked: ", date);
+    setDate(date);
+    hideDatePicker();
+  };
+
+  
+
+    // const [startDate, setDate] = useState("DD/MM");
+  
   const [startTime, setStart] = useState("Start time");
   const [endTime, setEnd] = useState("End time");
 
@@ -32,14 +63,21 @@ export default function CreatePage({ navigation }) {
         mode="outlined"
         defaultValue={eventName}
       />
-      <TextInput
+      {/* <TextInput
         label="Month/Date"
         name="Month/Date"
         style={styles.input}
-        value={date.format}
+        value={startDate.format}
         onChangeText={(newText) => setDate(newText)}
         mode="outlined"
-        defaultValue={date}
+        defaultValue={startDate}
+      /> */}
+      <Button title="Show Date Picker" onPress={showDatePicker} />
+      <DateTimePickerModal
+        isVisible={isDatePickerVisible}
+        mode="date"
+        onConfirm={handleConfirm}
+        onCancel={hideDatePicker}
       />
       <TextInput
         label="startTime"

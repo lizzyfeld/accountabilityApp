@@ -10,6 +10,7 @@
     "eject": "expo eject"
   },
   "dependencies": {
+    "@react-native-community/datetimepicker": "6.1.2",
     "@react-navigation/native": "^6.0.10",
     "@react-navigation/native-stack": "^6.6.2",
     "expo": "~45.0.0",
@@ -17,8 +18,11 @@
     "react": "17.0.2",
     "react-date-inputs": "^1.6.0",
     "react-date-object": "^2.1.5",
+    "react-datepicker": "^4.8.0",
     "react-dom": "17.0.2",
-    "react-native": "0.68.1",
+    "react-native": "0.68.2",
+    "react-native-date-picker": "^4.2.5",
+    "react-native-modal-datetime-picker": "^14.0.0",
     "react-native-safe-area-context": "4.2.4",
     "react-native-screens": "~3.11.1",
     "react-native-web": "0.17.7"

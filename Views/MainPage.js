@@ -29,7 +29,7 @@ export default function MainPage(props) {
         <Text>Create Event</Text>
       </Pressable>
       <Text>{route.params.eventProps}</Text>
-      <Text>{route.params.dateProps}</Text>
+      <Text>{route.params.date}</Text>
       <Text>{route.params.startTimeProps}</Text>
       <Text>{route.params.endTimeProps}</Text>
     </View>

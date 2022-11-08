@@ -6,7 +6,6 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import CreatePage from "./Views/CreatePage";
 
 const Stack = createNativeStackNavigator();
-
 function Test(props) {
   console.log("In test", props);
   return <View />;
