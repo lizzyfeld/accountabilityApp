@@ -17,6 +17,7 @@ export default function App() {
           component={MainPage}
           initialParams={{
             eventProps: "",
+            dateProps: "",
             startTimeProps: "",
             endTimeProps: "",
           }}

@@ -1,23 +1,29 @@
-import React, { useState } from "react";
-import { StyleSheet, Text, View, Pressable, SafeAreaView, Button} from "react-native";
+import React, { useState, useEffect } from "react";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Pressable,
+  SafeAreaView,
+  Button,
+} from "react-native";
 import { TextInput } from "react-native";
 // import DatePicker from "react-datepicker";
 // import DatePicker from 'react-native-date-picker';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 
-
-
 //import DateTimePicker from '@react-native-community/datetimepicker';
-
 
 // import ReactDateInputs from "react-date-inputs";
 
 export default function CreatePage({ navigation }) {
   const [eventName, setEventName] = useState("Event name");
 
-  const [date, setDate] = useState(''); 
+  const [date, setDate] = useState("");
 
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+
+  const [dateChosen, setDateChosen] = useState(false);
 
   const showDatePicker = () => {
     setDatePickerVisibility(true);
@@ -28,22 +34,21 @@ export default function CreatePage({ navigation }) {
   };
 
   const handleConfirm = (date) => {
-    console.warn("A date has been picked: ", date);
     setDate(date);
+    console.warn("A date has been picked: ", date);
     hideDatePicker();
   };
 
-  
+  // const [startDate, setDate] = useState("DD/MM");
 
-    // const [startDate, setDate] = useState("DD/MM");
-  
   const [startTime, setStart] = useState("Start time");
   const [endTime, setEnd] = useState("End time");
 
   const createEvent = () => {
+    console.warn([date]);
     navigation.navigate("MainPage", {
       eventProps: eventName,
-      // dateProps: dateName,
+      dateProps: date.toString(),
       startTimeProps: startTime,
       endTimeProps: endTime,
     });
@@ -70,7 +75,9 @@ export default function CreatePage({ navigation }) {
         mode="outlined"
         defaultValue={startDate}
       /> */}
-      <Button title="Show Date Picker" onPress={showDatePicker} />
+      {!dateChosen && (
+        <Button title="Show Date Picker" onPress={showDatePicker} />
+      )}
       <DateTimePickerModal
         isVisible={isDatePickerVisible}
         mode="date"

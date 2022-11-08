@@ -33,9 +33,7 @@ export default function MainPage(props) {
         <Text style={style.eventInfoText}>
           Event Name: {route.params.eventProps}
         </Text>
-        <Text style={style.eventInfoText}>
-          Date: {route.params.startTimeProps}
-        </Text>
+        <Text style={style.eventInfoText}>Date: {route.params.dateProps}</Text>
         <Text style={style.eventInfoText}>
           Start Time: {route.params.startTimeProps}
         </Text>
