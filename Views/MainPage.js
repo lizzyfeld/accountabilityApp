@@ -26,12 +26,23 @@ export default function MainPage(props) {
           onCreateEvent();
         }}
       >
-        <Text>Create Event</Text>
+        <Text>Create New Event</Text>
       </Pressable>
-      <Text>{route.params.eventProps}</Text>
-      <Text>{route.params.date}</Text>
-      <Text>{route.params.startTimeProps}</Text>
-      <Text>{route.params.endTimeProps}</Text>
+
+      <View style={style.eventInfoContainer}>
+        <Text style={style.eventInfoText}>
+          Event Name: {route.params.eventProps}
+        </Text>
+        <Text style={style.eventInfoText}>
+          Date: {route.params.startTimeProps}
+        </Text>
+        <Text style={style.eventInfoText}>
+          Start Time: {route.params.startTimeProps}
+        </Text>
+        <Text style={style.eventInfoText}>
+          End Time: {route.params.endTimeProps}
+        </Text>
+      </View>
     </View>
   );
 }
@@ -52,8 +63,22 @@ const style = StyleSheet.create({
     justifyContent: "center",
     paddingVertical: 12,
     paddingHorizontal: 32,
-    borderRadius: 4,
+    borderRadius: 20,
     elevation: 3,
     backgroundColor: "pink",
+  },
+  eventInfoContainer: {
+    justifyContent: "space-evenly",
+    height: "30%",
+    width: "50%",
+    borderRadius: 20,
+  },
+  eventInfoText: {
+    color: "black",
+    backgroundColor: "pink",
+    color: "black",
+    height: "10%",
+    paddingLeft: 10,
+    borderRadius: 20,
   },
 });

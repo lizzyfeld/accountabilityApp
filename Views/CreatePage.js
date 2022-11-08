@@ -43,11 +43,9 @@ export default function CreatePage({ navigation }) {
   const createEvent = () => {
     navigation.navigate("MainPage", {
       eventProps: eventName,
-      dateProps: date,
+      // dateProps: dateName,
       startTimeProps: startTime,
       endTimeProps: endTime,
-      // id: 2,
-      // data: "azsdasdasd",
     });
   };
 
@@ -98,7 +96,7 @@ export default function CreatePage({ navigation }) {
         defaultValue={endTime}
       />
       <Pressable style={styles.button} onPress={createEvent}>
-        <Text style = {styles.buttontext}>Create Event</Text>
+        <Text style={styles.buttontext}>Create Event</Text>
       </Pressable>
     </View>
   );
@@ -114,7 +112,7 @@ const styles = StyleSheet.create({
   header: {
     fontSize: 25,
     fontWeight: "bold",
-    marginBottom: 20
+    marginBottom: 20,
   },
   button: {
     alignItems: "center",
@@ -124,7 +122,7 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     elevation: 3,
     backgroundColor: "pink",
-    marginTop: '20%'
+    marginTop: "20%",
   },
   input: {
     width: 100,
@@ -133,7 +131,7 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   buttontext: {
-    fontWeight: 'bold', 
-    fontSize: 18
-  }
+    fontWeight: "bold",
+    fontSize: 18,
+  },
 });
