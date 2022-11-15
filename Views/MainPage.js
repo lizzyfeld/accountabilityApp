@@ -11,7 +11,8 @@ import { StyleSheet, Text, View, Pressable } from "react-native";
 export default function MainPage(props) {
   const { route, navigation } = props;
   console.log(route);
-  // const { eventProps } = route.params;
+  const date = route.params.dateProps.split(" ");
+  console.warn("here", date);
 
   function onCreateEvent() {
     navigation.navigate("CreatePage");
