@@ -15,12 +15,12 @@ export default function CreatePage({ navigation }) {
   const [currentMode, setCurrentMode] = useState("date");
 
   const showDatePicker = (mode) => {
-    //setCurrentMode(mode);
-    //setDatePickerVisibility(true);
+    setCurrentMode(mode);
+    setDatePickerVisibility(true);
   };
 
   const hideDateTimePicker = () => {
-    //setDatePickerVisibility(false);
+    setDatePickerVisibility(false);
   };
 
   const handleDateConfirm = (date) => {
@@ -67,7 +67,7 @@ export default function CreatePage({ navigation }) {
         defaultValue={eventName}
       />
       {/* {!dateChosen && <Button title="Pick Date" onPress={showDatePicker} />} */}
-      <Button title="Pick Date" onPress={showDatePicker("date")} />
+      <Button title="Pick Date" onPress={() => showDatePicker("date")} />
       <DateTimePickerModal
         isVisible={isDatePickerVisible}
         mode={currentMode}
@@ -77,7 +77,7 @@ export default function CreatePage({ navigation }) {
       {/* {!startTimeChosen && (
         <Button title="Pick Start Time" onPress={showDatePicker} />
       )} */}
-      <Button title="Pick Start Time" onPress={showDatePicker("time")} />
+      <Button title="Pick Start Time" onPress={() => showDatePicker("time")} />
       <DateTimePickerModal
         isVisible={isDatePickerVisible}
         mode={currentMode}
@@ -87,7 +87,7 @@ export default function CreatePage({ navigation }) {
       {/* {!endTimeChosen && (
         <Button title="Pick End Time" onPress={showDatePicker} />
       )} */}
-      <Button title="Pick End Time" onPress={showDatePicker("time")} />
+      <Button title="Pick End Time" onPress={() => showDatePicker("time")} />
       <DateTimePickerModal
         isVisible={isDatePickerVisible}
         mode={currentMode}
