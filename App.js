@@ -4,6 +4,7 @@ import MainPage from "./Views/MainPage";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import CreatePage from "./Views/CreatePage";
+import {supabase}  from "./supabase";
 
 const Stack = createNativeStackNavigator();
 
