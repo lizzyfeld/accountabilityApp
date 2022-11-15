@@ -1,56 +1,56 @@
-import React, { useState, useEffect } from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  Pressable,
-  SafeAreaView,
-  Button,
-} from "react-native";
+import React, { useState } from "react";
+import { StyleSheet, Text, View, Pressable, Button } from "react-native";
 import { TextInput } from "react-native";
-// import DatePicker from "react-datepicker";
-// import DatePicker from 'react-native-date-picker';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
-
-//import DateTimePicker from '@react-native-community/datetimepicker';
-
-// import ReactDateInputs from "react-date-inputs";
 
 export default function CreatePage({ navigation }) {
   const [eventName, setEventName] = useState("Event name");
-
   const [date, setDate] = useState("");
-
-  const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
-
-  const [dateChosen, setDateChosen] = useState(false);
-
-  const showDatePicker = () => {
-    setDatePickerVisibility(true);
-  };
-
-  const hideDatePicker = () => {
-    setDatePickerVisibility(false);
-  };
-
-  const handleConfirm = (date) => {
-    setDate(date);
-    console.warn("A date has been picked: ", date);
-    hideDatePicker();
-  };
-
-  // const [startDate, setDate] = useState("DD/MM");
-
   const [startTime, setStart] = useState("Start time");
   const [endTime, setEnd] = useState("End time");
+  const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+  const [dateChosen, setDateChosen] = useState(false);
+  const [startTimeChosen, setStartTimeChosen] = useState(false);
+  const [endTimeChosen, setEndTimeChosen] = useState(false);
+  const [currentMode, setCurrentMode] = useState("date");
+
+  const showDatePicker = (mode) => {
+    //setCurrentMode(mode);
+    //setDatePickerVisibility(true);
+  };
+
+  const hideDateTimePicker = () => {
+    //setDatePickerVisibility(false);
+  };
+
+  const handleDateConfirm = (date) => {
+    console.warn("A date has been picked: ", date);
+    setDate(date);
+    setDateChosen(true);
+    hideDateTimePicker();
+  };
+
+  const handleStartTimeConfirm = (time) => {
+    console.warn("hey", time);
+    setStart(time);
+    setStartTimeChosen(time);
+    hideDateTimePicker();
+  };
+
+  const handleEndTimeConfirm = (time) => {
+    console.warn("hello", time);
+    setEnd(time);
+    setEndTimeChosen(time);
+    hideDateTimePicker();
+  };
 
   const createEvent = () => {
     console.warn([date]);
     navigation.navigate("MainPage", {
       eventProps: eventName,
       dateProps: date.toString(),
-      startTimeProps: startTime,
-      endTimeProps: endTime,
+      startTimeProps: startTime.toString(),
+      endTimeProps: endTime.toString(),
     });
   };
 
@@ -66,41 +66,33 @@ export default function CreatePage({ navigation }) {
         mode="outlined"
         defaultValue={eventName}
       />
-      {/* <TextInput
-        label="Month/Date"
-        name="Month/Date"
-        style={styles.input}
-        value={startDate.format}
-        onChangeText={(newText) => setDate(newText)}
-        mode="outlined"
-        defaultValue={startDate}
-      /> */}
-      {!dateChosen && (
-        <Button title="Show Date Picker" onPress={showDatePicker} />
-      )}
+      {/* {!dateChosen && <Button title="Pick Date" onPress={showDatePicker} />} */}
+      <Button title="Pick Date" onPress={showDatePicker("date")} />
       <DateTimePickerModal
         isVisible={isDatePickerVisible}
-        mode="date"
-        onConfirm={handleConfirm}
-        onCancel={hideDatePicker}
+        mode={currentMode}
+        onConfirm={handleDateConfirm}
+        onCancel={hideDateTimePicker}
       />
-      <TextInput
-        label="startTime"
-        name="startTime"
-        style={styles.input}
-        value={startTime}
-        onChangeText={(newText) => setStart(newText)}
-        mode="outlined"
-        defaultValue={startTime}
+      {/* {!startTimeChosen && (
+        <Button title="Pick Start Time" onPress={showDatePicker} />
+      )} */}
+      <Button title="Pick Start Time" onPress={showDatePicker("time")} />
+      <DateTimePickerModal
+        isVisible={isDatePickerVisible}
+        mode={currentMode}
+        onConfirm={handleStartTimeConfirm}
+        onCancel={hideDateTimePicker}
       />
-      <TextInput
-        label="endTime"
-        name="endTime"
-        style={styles.input}
-        value={endTime}
-        onChangeText={(newText) => setEnd(newText)}
-        mode="outlined"
-        defaultValue={endTime}
+      {/* {!endTimeChosen && (
+        <Button title="Pick End Time" onPress={showDatePicker} />
+      )} */}
+      <Button title="Pick End Time" onPress={showDatePicker("time")} />
+      <DateTimePickerModal
+        isVisible={isDatePickerVisible}
+        mode={currentMode}
+        onConfirm={handleEndTimeConfirm}
+        onCancel={hideDateTimePicker}
       />
       <Pressable style={styles.button} onPress={createEvent}>
         <Text style={styles.buttontext}>Create Event</Text>
