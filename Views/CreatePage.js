@@ -71,6 +71,7 @@ export default function CreatePage({ navigation }) {
       console.log(err);
     }
   };
+
   const DateChosen = () => {
     return (
       <DateTimePickerModal
