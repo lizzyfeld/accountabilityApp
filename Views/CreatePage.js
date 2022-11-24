@@ -6,8 +6,8 @@ import DateTimePickerModal from "react-native-modal-datetime-picker";
 export default function CreatePage({ navigation }) {
   const [eventName, setEventName] = useState("Event name");
   const [date, setDate] = useState("");
-  const [startTime, setStart] = useState("Start time");
-  const [endTime, setEnd] = useState("End time");
+  const [startTime, setStart] = useState("");
+  const [endTime, setEnd] = useState("");
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [dateChosen, setDateChosen] = useState(false);
   const [startTimeChosen, setStartTimeChosen] = useState(false);
@@ -54,6 +54,39 @@ export default function CreatePage({ navigation }) {
     });
   };
 
+  const DateChosen = () => {
+    return (
+      <DateTimePickerModal
+        isVisible={isDatePickerVisible}
+        mode={currentMode}
+        onConfirm={handleDateConfirm}
+        onCancel={hideDateTimePicker}
+      />
+    );
+  };
+
+  const StartTimeChosen = () => {
+    return (
+      <DateTimePickerModal
+        isVisible={isDatePickerVisible}
+        mode={currentMode}
+        onConfirm={handleStartTimeConfirm}
+        onCancel={hideDateTimePicker}
+      />
+    );
+  };
+
+  const EndTimeChosen = () => {
+    return (
+      <DateTimePickerModal
+        isVisible={isDatePickerVisible}
+        mode={currentMode}
+        onConfirm={handleEndTimeConfirm}
+        onCancel={hideDateTimePicker}
+      />
+    );
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.header}>Make your new event perra!</Text>
@@ -68,32 +101,17 @@ export default function CreatePage({ navigation }) {
       />
       {/* {!dateChosen && <Button title="Pick Date" onPress={showDatePicker} />} */}
       <Button title="Pick Date" onPress={() => showDatePicker("date")} />
-      <DateTimePickerModal
-        isVisible={isDatePickerVisible}
-        mode={currentMode}
-        onConfirm={handleDateConfirm}
-        onCancel={hideDateTimePicker}
-      />
+      <DateChosen />
       {/* {!startTimeChosen && (
         <Button title="Pick Start Time" onPress={showDatePicker} />
       )} */}
       <Button title="Pick Start Time" onPress={() => showDatePicker("time")} />
-      <DateTimePickerModal
-        isVisible={isDatePickerVisible}
-        mode={currentMode}
-        onConfirm={handleStartTimeConfirm}
-        onCancel={hideDateTimePicker}
-      />
+      <StartTimeChosen />
       {/* {!endTimeChosen && (
         <Button title="Pick End Time" onPress={showDatePicker} />
       )} */}
       <Button title="Pick End Time" onPress={() => showDatePicker("time")} />
-      <DateTimePickerModal
-        isVisible={isDatePickerVisible}
-        mode={currentMode}
-        onConfirm={handleEndTimeConfirm}
-        onCancel={hideDateTimePicker}
-      />
+      <EndTimeChosen />
       <Pressable style={styles.button} onPress={createEvent}>
         <Text style={styles.buttontext}>Create Event</Text>
       </Pressable>
