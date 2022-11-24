@@ -11,6 +11,7 @@ import { TextInput } from "react-native";
 // import DatePicker from "react-datepicker";
 // import DatePicker from 'react-native-date-picker';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
+import {supabase}  from "../supabase";
 
 //import DateTimePicker from '@react-native-community/datetimepicker';
 
@@ -52,8 +53,19 @@ export default function CreatePage({ navigation }) {
       startTimeProps: startTime,
       endTimeProps: endTime,
     });
+    
   };
+  const addEvent = async () => {
+    try {
+      const {data, error } = await supabase.from('events').insert({
+        event_name: eventName
 
+      });
+      console.log("supbase added event name", error);
+    } catch (err) {
+      console.log(err)
+    }
+  }
   return (
     <View style={styles.container}>
       <Text style={styles.header}>Make your new event perra!</Text>
@@ -102,7 +114,7 @@ export default function CreatePage({ navigation }) {
         mode="outlined"
         defaultValue={endTime}
       />
-      <Pressable style={styles.button} onPress={createEvent}>
+      <Pressable style={styles.button} onPress={addEvent}>
         <Text style={styles.buttontext}>Create Event</Text>
       </Pressable>
     </View>
