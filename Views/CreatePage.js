@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import { StyleSheet, Text, View, Pressable, Button } from "react-native";
 import { TextInput } from "react-native";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
-import {supabase}  from "../supabase";
+import { supabase } from "../supabase";
 
 export default function CreatePage({ navigation }) {
   const [eventName, setEventName] = useState("Event name");
   const [date, setDate] = useState("");
-  const [startTime, setStart] = useState("Start time");
-  const [endTime, setEnd] = useState("End time");
+  const [startTime, setStart] = useState("");
+  const [endTime, setEnd] = useState("");
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [dateChosen, setDateChosen] = useState(false);
   const [startTimeChosen, setStartTimeChosen] = useState(false);
@@ -45,27 +45,64 @@ export default function CreatePage({ navigation }) {
     hideDateTimePicker();
   };
 
-  const createEvent = () => {
-    console.warn([date]);
+  // const createEvent = () => {
+  //   console.warn([date]);
+  //   navigation.navigate("MainPage", {
+  //     eventProps: eventName,
+  //     dateProps: date.toString(),
+  //     startTimeProps: startTime.toString(),
+  //     endTimeProps: endTime.toString(),
+  //   });
+  // };
+  const addEvent = async () => {
     navigation.navigate("MainPage", {
       eventProps: eventName,
       dateProps: date.toString(),
       startTimeProps: startTime.toString(),
       endTimeProps: endTime.toString(),
     });
-    
-  };
-  const addEvent = async () => {
     try {
-      const {data, error } = await supabase.from('events').insert({
-        event_name: eventName
-
+      const { data, error } = await supabase.from("events").insert({
+        event_name: eventName,
       });
       console.log("supbase added event name", error);
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
-  }
+  };
+  const DateChosen = () => {
+    return (
+      <DateTimePickerModal
+        isVisible={isDatePickerVisible}
+        mode={currentMode}
+        onConfirm={handleDateConfirm}
+        onCancel={hideDateTimePicker}
+      />
+    );
+  };
+
+  const StartTimeChosen = () => {
+    return (
+      <DateTimePickerModal
+        isVisible={isDatePickerVisible}
+        mode={currentMode}
+        onConfirm={handleStartTimeConfirm}
+        onCancel={hideDateTimePicker}
+      />
+    );
+  };
+
+  const EndTimeChosen = () => {
+    return (
+      <DateTimePickerModal
+        isVisible={isDatePickerVisible}
+        mode={currentMode}
+        onConfirm={handleEndTimeConfirm}
+        onCancel={hideDateTimePicker}
+      />
+    );
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.header}>Make your new event perra!</Text>
@@ -78,27 +115,10 @@ export default function CreatePage({ navigation }) {
         mode="outlined"
         defaultValue={eventName}
       />
-      {/* {!dateChosen && <Button title="Pick Date" onPress={showDatePicker} />} */}
       <Button title="Pick Date" onPress={() => showDatePicker("date")} />
-      <DateTimePickerModal
-        isVisible={isDatePickerVisible}
-        mode={currentMode}
-        onConfirm={handleDateConfirm}
-        onCancel={hideDateTimePicker}
-      />
-      {/* {!startTimeChosen && (
-        <Button title="Pick Start Time" onPress={showDatePicker} />
-      )} */}
+      <DateChosen />
       <Button title="Pick Start Time" onPress={() => showDatePicker("time")} />
-      <DateTimePickerModal
-        isVisible={isDatePickerVisible}
-        mode={currentMode}
-        onConfirm={handleStartTimeConfirm}
-        onCancel={hideDateTimePicker}
-      />
-      {/* {!endTimeChosen && (
-        <Button title="Pick End Time" onPress={showDatePicker} />
-      )} */}
+      <StartTimeChosen />
       <Button title="Pick End Time" onPress={() => showDatePicker("time")} />
       <DateTimePickerModal
         isVisible={isDatePickerVisible}
@@ -106,6 +126,7 @@ export default function CreatePage({ navigation }) {
         onConfirm={handleEndTimeConfirm}
         onCancel={hideDateTimePicker}
       />
+      <EndTimeChosen />
       <Pressable style={styles.button} onPress={addEvent}>
         <Text style={styles.buttontext}>Create Event</Text>
       </Pressable>
