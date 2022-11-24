@@ -9,6 +9,8 @@ export default function CreatePage({ navigation }) {
   const [startTime, setStart] = useState("");
   const [endTime, setEnd] = useState("");
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+  const [isStartTimeVisible, setStartTimeVisibility] = useState(false);
+  const [isEndTimeVisible, setEndTimeVisibility] = useState(false);
   const [dateChosen, setDateChosen] = useState(false);
   const [startTimeChosen, setStartTimeChosen] = useState(false);
   const [endTimeChosen, setEndTimeChosen] = useState(false);
@@ -16,7 +18,6 @@ export default function CreatePage({ navigation }) {
 
   const showDatePicker = (mode) => {
     setCurrentMode(mode);
-    setDatePickerVisibility(true);
   };
 
   const hideDateTimePicker = () => {
@@ -34,14 +35,14 @@ export default function CreatePage({ navigation }) {
     console.warn("hey", time);
     setStart(time);
     setStartTimeChosen(time);
-    hideDateTimePicker();
+    setStartTimeVisibility(false);
   };
 
   const handleEndTimeConfirm = (time) => {
     console.warn("hello", time);
     setEnd(time);
     setEndTimeChosen(time);
-    hideDateTimePicker();
+    setEndTimeVisibility(false);
   };
 
   const createEvent = () => {
@@ -68,10 +69,12 @@ export default function CreatePage({ navigation }) {
   const StartTimeChosen = () => {
     return (
       <DateTimePickerModal
-        isVisible={isDatePickerVisible}
+        isVisible={isStartTimeVisible}
         mode={currentMode}
         onConfirm={handleStartTimeConfirm}
-        onCancel={hideDateTimePicker}
+        onCancel={() => {
+          setStartTimeVisibility(false);
+        }}
       />
     );
   };
@@ -79,10 +82,12 @@ export default function CreatePage({ navigation }) {
   const EndTimeChosen = () => {
     return (
       <DateTimePickerModal
-        isVisible={isDatePickerVisible}
+        isVisible={isEndTimeVisible}
         mode={currentMode}
         onConfirm={handleEndTimeConfirm}
-        onCancel={hideDateTimePicker}
+        onCancel={() => {
+          setEndTimeVisibility(false);
+        }}
       />
     );
   };
@@ -100,17 +105,35 @@ export default function CreatePage({ navigation }) {
         defaultValue={eventName}
       />
       {/* {!dateChosen && <Button title="Pick Date" onPress={showDatePicker} />} */}
-      <Button title="Pick Date" onPress={() => showDatePicker("date")} />
+      <Button
+        title="Pick Date"
+        onPress={() => {
+          showDatePicker("date");
+          setDatePickerVisibility(true);
+        }}
+      />
       <DateChosen />
       {/* {!startTimeChosen && (
         <Button title="Pick Start Time" onPress={showDatePicker} />
       )} */}
-      <Button title="Pick Start Time" onPress={() => showDatePicker("time")} />
+      <Button
+        title="Pick Start Time"
+        onPress={() => {
+          showDatePicker("time");
+          setStartTimeVisibility(true);
+        }}
+      />
       <StartTimeChosen />
       {/* {!endTimeChosen && (
         <Button title="Pick End Time" onPress={showDatePicker} />
       )} */}
-      <Button title="Pick End Time" onPress={() => showDatePicker("time")} />
+      <Button
+        title="Pick End Time"
+        onPress={() => {
+          showDatePicker("time");
+          setEndTimeVisibility(true);
+        }}
+      />
       <EndTimeChosen />
       <Pressable style={styles.button} onPress={createEvent}>
         <Text style={styles.buttontext}>Create Event</Text>
