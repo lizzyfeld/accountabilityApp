@@ -9,6 +9,9 @@ import {supabase}  from "./supabase";
 const Stack = createNativeStackNavigator();
 
 export default function App() {
+  
+
+
   return (
     <NavigationContainer>
       <Stack.Navigator>
