@@ -72,6 +72,15 @@ export default function CreatePage({ navigation }) {
     }
   };
 
+  const getEvent = async () => {
+      try {
+        const { data, error } = await supabase.from("events").select("event_name", "event_date");
+        console.log("hii get all the names", data, "error: ", error)
+      } catch (err) {
+        console.log(err);
+      }
+  }
+
   const DateChosen = () => {
     return (
       <DateTimePickerModal
@@ -155,6 +164,9 @@ export default function CreatePage({ navigation }) {
       <Pressable style={styles.button} onPress={addEvent}>
         <Text style={styles.buttontext}>Create Event</Text>
       </Pressable>
+      <Pressable style={styles.button} onPress={getEvent}>
+        <Text style={styles.buttontext}>Back to Home</Text>
+      </Pressable>
     </View>
   );
 }
@@ -179,7 +191,7 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     elevation: 3,
     backgroundColor: "pink",
-    marginTop: "20%",
+    marginTop: "5%",
   },
   input: {
     width: 100,
