@@ -19,11 +19,12 @@ export default function CreatePage({ navigation }) {
   const [currentMode, setCurrentMode] = useState("date");
   const [event, setEvent] = useState([]);
 
-  const Event = ({name}) => {
+  const Event = ({name, date}) => {
     console.log(name)
   return (
     <SafeAreaView>
       <Text>{name}</Text>
+      <Text>{date}</Text>
       </SafeAreaView>
   )};
 
@@ -75,6 +76,9 @@ export default function CreatePage({ navigation }) {
     try {
       const { data, error } = await supabase.from("events").insert({
         event_name: eventName,
+        event_date: date,
+        start_time: startTime,
+        end_time: endTime,
       });
       console.log("supbase added event name", error);
     } catch (err) {
@@ -150,7 +154,7 @@ export default function CreatePage({ navigation }) {
 
     <FlatList
         data = {event}
-        renderItem = {(eventData) => <Event name = {eventData.item.event_name} /> }
+        renderItem = {(eventData) => <Event name = {eventData.item.event_name} date = {eventData.item.event_date}  /> }
         keyExtractor = {(item) => item.id}
       />
 
