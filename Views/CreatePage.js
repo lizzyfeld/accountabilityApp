@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View, Pressable, Button } from "react-native";
+import { StyleSheet, Text, View, Pressable, Button, FlatList } from "react-native";
 import { TextInput } from "react-native";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { supabase } from "../supabase";
@@ -16,6 +16,7 @@ export default function CreatePage({ navigation }) {
   const [startTimeChosen, setStartTimeChosen] = useState(false);
   const [endTimeChosen, setEndTimeChosen] = useState(false);
   const [currentMode, setCurrentMode] = useState("date");
+  const [event, setEvent] = useState([]);
 
   const showDatePicker = (mode) => {
     setCurrentMode(mode);
@@ -74,12 +75,18 @@ export default function CreatePage({ navigation }) {
 
   const getEvent = async () => {
       try {
-        const { data, error } = await supabase.from("events").select("event_name", "event_date");
+        const { data, error } = await supabase.from("events").select('*');
+        setEvent(data);
         console.log("hii get all the names", data, "error: ", error)
+        console.log("event data, ", event)
       } catch (err) {
         console.log(err);
       }
   }
+
+  React.useEffect( () => {
+    getEvent();
+  }, [])
 
   const DateChosen = () => {
     return (
@@ -119,6 +126,18 @@ export default function CreatePage({ navigation }) {
   };
 
   return (
+
+    //This returns the flat list for objects, missign here!
+
+    // <View style = {styles.container}>
+    //   <FlatList>
+    //     data = {event}
+    //     renderItem =
+    //     keyExtractor =
+    //   </FlatList>
+
+    // </View>
+
     <View style={styles.container}>
       <Text style={styles.header}>Make your new event perra!</Text>
       <TextInput
