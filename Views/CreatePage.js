@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { StyleSheet, Text, View, Pressable, Button, FlatList } from "react-native";
 import { TextInput } from "react-native";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { supabase } from "../supabase";
 
 export default function CreatePage({ navigation }) {
@@ -17,6 +18,14 @@ export default function CreatePage({ navigation }) {
   const [endTimeChosen, setEndTimeChosen] = useState(false);
   const [currentMode, setCurrentMode] = useState("date");
   const [event, setEvent] = useState([]);
+
+  const Event = ({name}) => {
+    console.log(name)
+  return (
+    <SafeAreaView>
+      <Text>{name}</Text>
+      </SafeAreaView>
+  )};
 
   const showDatePicker = (mode) => {
     setCurrentMode(mode);
@@ -57,12 +66,12 @@ export default function CreatePage({ navigation }) {
   //   });
   // };
   const addEvent = async () => {
-    navigation.navigate("MainPage", {
-      eventProps: eventName,
-      dateProps: date.toString(),
-      startTimeProps: startTime.toString(),
-      endTimeProps: endTime.toString(),
-    });
+    // navigation.navigate("MainPage", {
+    //   eventProps: eventName,
+    //   dateProps: date.toString(),
+    //   startTimeProps: startTime.toString(),
+    //   endTimeProps: endTime.toString(),
+    // });
     try {
       const { data, error } = await supabase.from("events").insert({
         event_name: eventName,
@@ -127,18 +136,24 @@ export default function CreatePage({ navigation }) {
 
   return (
 
-    //This returns the flat list for objects, missign here!
+    // This returns the flat list for objects, missign here!
 
     // <View style = {styles.container}>
-    //   <FlatList>
+    //   <FlatList
     //     data = {event}
-    //     renderItem =
-    //     keyExtractor =
+    //     renderItem = {(event) => <Event name = {event.item.event_name} /> }
+    //     keyExtractor = {(item) => item.id}
     //   </FlatList>
-
     // </View>
 
     <View style={styles.container}>
+
+    <FlatList
+        data = {event}
+        renderItem = {(eventData) => <Event name = {eventData.item.event_name} /> }
+        keyExtractor = {(item) => item.id}
+      />
+
       <Text style={styles.header}>Make your new event perra!</Text>
       <TextInput
         label="Name of event"
@@ -183,9 +198,9 @@ export default function CreatePage({ navigation }) {
       <Pressable style={styles.button} onPress={addEvent}>
         <Text style={styles.buttontext}>Create Event</Text>
       </Pressable>
-      <Pressable style={styles.button} onPress={getEvent}>
+      {/* <Pressable style={styles.button} onPress={getEvent}>
         <Text style={styles.buttontext}>Back to Home</Text>
-      </Pressable>
+      </Pressable> */}
     </View>
   );
 }
