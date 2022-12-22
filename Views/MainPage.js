@@ -1,37 +1,76 @@
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View, Pressable } from "react-native";
+import { FlatList, StyleSheet, Text, View, Pressable } from "react-native";
+import { supabase } from "../supabase";
+import React, { useState } from "react";
+import gregorian_en from "react-date-object/locales/gregorian_en";
 
-// import style from './mainPage.css'
-
-{
-  /* <link rel="stylesheet" href="mainPage.css"></link> */
-}
-
-// props: {  route: sadsdsd, navigation: asdsads, jeff: 'bezos' }
 export default function MainPage(props) {
   const { route, navigation } = props;
   console.log(route);
   const date = route.params.dateProps.split(" ");
+  const [event, setEvent] = useState([]);
   console.warn("here", date);
 
   function onCreateEvent() {
     navigation.navigate("CreatePage");
   }
 
+  React.useEffect(() => {
+    getEvent();
+  }, []);
+
+  const getEvent = async () => {
+    try {
+      const { data, error } = await supabase.from("events").select("*");
+      setEvent(data);
+      console.log("hii get all the names", data, "error: ", error);
+      console.log("event data, ", event);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const Event = ({ name, date }) => {
+    console.log(name);
+    return (
+      <View style={style.eventCard}>
+        <Text>{name}</Text>
+        <Text>{date}</Text>
+      </View>
+    );
+  };
+
   return (
     <View style={style.container}>
-      <Text style={style.header}></Text>
-      <Pressable
-        style={style.button}
-        onPress={() => {
-          onCreateEvent();
-        }}
-      >
-        <Text>Create New Event</Text>
-      </Pressable>
+      <Text style={style.header}> Your Upcoming Events</Text>
+      <View style={style.flatListContent}>
+        <FlatList
+          data={event}
+          renderItem={(eventData) => (
+            <Event
+              name={eventData.item.event_name}
+              // date={eventData.item.event_date}
+            />
+          )}
+          keyExtractor={(item) => item.id}
+        />
+      </View>
+      <View style={style.buttonContainer}>
+        <Pressable
+          style={style.button}
+          onPress={() => {
+            onCreateEvent();
+          }}
+        >
+          <Text>Create New Event</Text>
+        </Pressable>
+      </View>
+      {/* <View style={style.eventInfoContainer}></View> */}
+    </View>
+  );
+}
 
-      <View style={style.eventInfoContainer}>
-        <Text style={style.eventInfoText}>
+{
+  /* <Text style={style.eventInfoText}>
           Event Name: {route.params.eventProps}
         </Text>
         <Text style={style.eventInfoText}>Date: {route.params.dateProps}</Text>
@@ -40,10 +79,7 @@ export default function MainPage(props) {
         </Text>
         <Text style={style.eventInfoText}>
           End Time: {route.params.endTimeProps}
-        </Text>
-      </View>
-    </View>
-  );
+        </Text> */
 }
 
 const style = StyleSheet.create({
@@ -51,20 +87,24 @@ const style = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
     alignItems: "center",
-    justifyContent: "center",
+    // justifyContent: "center",
   },
   header: {
-    fontSize: 30,
+    fontSize: 25,
     fontWeight: "bold",
+    padding: 40,
   },
   button: {
-    alignItems: "center",
-    justifyContent: "center",
+    // alignItems: "center",
+    // justifyContent: "center",
     paddingVertical: 12,
     paddingHorizontal: 32,
     borderRadius: 20,
-    elevation: 3,
+    // elevation: 3,
     backgroundColor: "pink",
+  },
+  buttonContainer: {
+    paddingTop: 40,
   },
   eventInfoContainer: {
     justifyContent: "space-evenly",
@@ -79,5 +119,16 @@ const style = StyleSheet.create({
     height: "10%",
     paddingLeft: 10,
     borderRadius: 20,
+  },
+  flatListContent: {
+    height: "auto",
+    width: "50%",
+    backgroundColor: "yellow",
+  },
+  eventCard: {
+    backgroundColor: "green",
+    margin: 10,
+    padding: 5,
+    borderRadius: 10,
   },
 });
