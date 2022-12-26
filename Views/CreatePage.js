@@ -10,6 +10,7 @@ import {
 import { TextInput } from "react-native";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { supabase } from "../supabase";
+import { MainPage, getEvent } from "./MainPage";
 
 export default function CreatePage({ navigation }) {
   const [eventName, setEventName] = useState("Event name");
@@ -53,6 +54,17 @@ export default function CreatePage({ navigation }) {
     setEndTimeVisibility(false);
   };
 
+  const getEvent = async () => {
+    try {
+      const { data, error } = await supabase.from("events").select("*");
+      // setEvent(data);
+      console.log("hii get all the names", data, "error: ", error);
+      // console.log("event data, ", event);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   const addEvent = async () => {
     try {
       const { data, error } = await supabase.from("events").insert({
@@ -68,6 +80,7 @@ export default function CreatePage({ navigation }) {
         endTimeProps: endTime.toString(),
       });
       console.warn("supbase added event name", error);
+      getEvent();
     } catch (err) {
       console.log(err);
     }

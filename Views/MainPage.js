@@ -41,7 +41,17 @@ export default function MainPage(props) {
 
   return (
     <View style={style.container}>
-      <Text style={style.header}> Your Upcoming Events</Text>
+      <Text style={style.header}> Your Upcoming Perra</Text>
+      <View style={style.buttonContainer}>
+        <Pressable
+          style={style.button}
+          onPress={() => {
+            onCreateEvent();
+          }}
+        >
+          <Text>Create New Event</Text>
+        </Pressable>
+      </View>
       <View style={style.flatListContent}>
         <FlatList
           data={event}
@@ -54,16 +64,7 @@ export default function MainPage(props) {
           keyExtractor={(item) => item.id}
         />
       </View>
-      <View style={style.buttonContainer}>
-        <Pressable
-          style={style.button}
-          onPress={() => {
-            onCreateEvent();
-          }}
-        >
-          <Text>Create New Event</Text>
-        </Pressable>
-      </View>
+
       {/* <View style={style.eventInfoContainer}></View> */}
     </View>
   );
@@ -104,7 +105,7 @@ const style = StyleSheet.create({
     backgroundColor: "pink",
   },
   buttonContainer: {
-    paddingTop: 40,
+    paddingTop: 5,
   },
   eventInfoContainer: {
     justifyContent: "space-evenly",
