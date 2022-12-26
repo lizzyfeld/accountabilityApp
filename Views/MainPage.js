@@ -48,7 +48,7 @@ export default function MainPage(props) {
           renderItem={(eventData) => (
             <Event
               name={eventData.item.event_name}
-              // date={eventData.item.event_date}
+              date={eventData.item.event_date}
             />
           )}
           keyExtractor={(item) => item.id}

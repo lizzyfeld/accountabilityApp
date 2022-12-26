@@ -34,6 +34,7 @@ export default function CreatePage({ navigation }) {
 
   const handleDateConfirm = (date) => {
     console.warn("A date has been picked: ", date);
+    //console.warn(moment(date).format("YYYY-MM-DD HH:mm:ss"));
     setDate(date);
     setDateChosen(true);
     hideDateTimePicker();
@@ -41,6 +42,7 @@ export default function CreatePage({ navigation }) {
 
   const handleStartTimeConfirm = (time) => {
     console.warn("hey", time);
+    //console.warn(moment(date).format("YYYY-MM-DD HH:mm:ss"));
     setStart(time);
     setStartTimeChosen(time);
     setStartTimeVisibility(false);
@@ -78,6 +80,7 @@ export default function CreatePage({ navigation }) {
       <DateTimePickerModal
         isVisible={isDatePickerVisible}
         mode={currentMode}
+        locale="en_GB"
         onConfirm={handleDateConfirm}
         onCancel={hideDateTimePicker}
       />
@@ -89,6 +92,7 @@ export default function CreatePage({ navigation }) {
       <DateTimePickerModal
         isVisible={isStartTimeVisible}
         mode={currentMode}
+        locale="en_GB"
         onConfirm={handleStartTimeConfirm}
         onCancel={() => {
           setStartTimeVisibility(false);
@@ -102,6 +106,7 @@ export default function CreatePage({ navigation }) {
       <DateTimePickerModal
         isVisible={isEndTimeVisible}
         mode={currentMode}
+        locale="en_GB"
         onConfirm={handleEndTimeConfirm}
         onCancel={() => {
           setEndTimeVisibility(false);
