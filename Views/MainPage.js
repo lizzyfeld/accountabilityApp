@@ -1,20 +1,39 @@
 import { FlatList, StyleSheet, Text, View, Pressable } from "react-native";
 import { supabase } from "../supabase";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import gregorian_en from "react-date-object/locales/gregorian_en";
+import * as SMS from 'expo-sms';
 
 export default function MainPage(props) {
   const { route, navigation } = props;
   console.log(route);
   const date = route.params.dateProps.split(" ");
   const [event, setEvent] = useState([]);
+  const [isAvailable, setIsAvailable] = useState(false);
   console.warn("here", date);
 
   function onCreateEvent() {
     navigation.navigate("CreatePage");
   }
 
-  React.useEffect(() => {
+  React.useEffect(async () => {
+    const isSmsAvailable = await SMS.isAvailableAsync();
+    setIsAvailable(isSmsAvailable);
+    console.log("Is SMS available", isSmsAvailable)
+  }, []);
+
+  console.log("right before await")
+
+  // const sendSms = async () => {
+  //   console.log("right before await")
+  //   const {result} = await SMS.sendSMSAsync(
+  //   ['9168932295'],
+  //   'I am a fat perra'
+  // );
+  //     console.log("result, ", result);
+  //   }; 
+
+  React.useEffect(async () => {
     getEvent();
   }, []);
 
@@ -52,6 +71,7 @@ export default function MainPage(props) {
           <Text>Create New Event</Text>
         </Pressable>
       </View>
+      {isAvailable ? <Button title = "Send SMS" onPress = {sendSms} /> : <Text>SMS not available</Text> }
       <View style={style.flatListContent}>
         <FlatList
           data={event}
